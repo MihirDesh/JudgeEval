@@ -26,3 +26,18 @@ CREATE TABLE scores (
     FOREIGN KEY (team_id) REFERENCES teams(team_id),
     FOREIGN KEY (parameter_id) REFERENCES parameters(parameter_id)   
 );
+
+CREATE TABLE competitions (
+    competition_id SERIAL PRIMARY KEY,
+    competition_name VARCHAR(255),
+);
+
+ALTER TABLE teams ADD COLUMN competition_id INTEGER;
+ALTER TABLE judges ADD COLUMN competition_id INTEGER;
+ALTER TABLE parameters ADD COLUMN competition_id INTEGER;
+ALTER TABLE scores ADD COLUMN competition_id INTEGER;
+
+ALTER TABLE teams ADD CONSTRAINT fk_teams_competition FOREIGN KEY (competition_id) REFERENCES competitions(competition_id);
+ALTER TABLE judges ADD CONSTRAINT fk_judges_competition FOREIGN KEY (competition_id) REFERENCES competitions(competition_id);
+ALTER TABLE parameters ADD CONSTRAINT fk_parameters_competition FOREIGN KEY (competition_id) REFERENCES competitions(competition_id);
+ALTER TABLE scores ADD CONSTRAINT fk_scores_competition FOREIGN KEY (competition_id) REFERENCES competitions(competition_id);
