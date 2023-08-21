@@ -30,6 +30,7 @@ CREATE TABLE scores (
 CREATE TABLE competitions (
     competition_id SERIAL PRIMARY KEY,
     competition_name VARCHAR(255),
+    competition_password VARCHAR(255)
 );
 
 ALTER TABLE teams ADD COLUMN competition_id INTEGER;
